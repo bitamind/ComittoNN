@@ -11,7 +11,7 @@
 
 //#define DEBUG
 
-// 繧､繝｡繝ｼ繧ｸ邂｡逅・
+// イメージ管理
 IMAGEDATA	*gImageData = NULL;
 long		gTotalPages = 0;
 long		gLoadBuffSize = 0;
@@ -54,7 +54,7 @@ char gDitherY_3bit[8] = {0, 2, 4, 6, 0, 2, 4, 6};
 char gDitherY_2bit[4] = {0, 2, 0, 2};
 
 extern "C" {
-// 繧ｵ繝阪う繝ｫ縺ｮ蛻晄悄蛹・
+// サムネイルの初期化
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailInitialize (JNIEnv *env, jclass obj, jlong id, jint pagesize, jint pagenum, jint imagenum)
 {
 #ifdef DEBUG
@@ -65,7 +65,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailInitiali
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ縺ｮNoImage險ｭ螳・
+// サムネイルのNoImage設定
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSetNone (JNIEnv *env, jclass obj, jlong id, jint index)
 {
 #ifdef DEBUG
@@ -76,7 +76,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSetNone 
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ縺ｮ谿九ｊ鬆伜沺遒ｺ隱・
+// サムネイルの残り領域確認
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailCheck (JNIEnv *env, jclass obj, jlong id, jint index)
 {
 #ifdef DEBUG
@@ -87,7 +87,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailCheck (J
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ縺ｮ谿九ｊ鬆伜沺遒ｺ隱・
+// サムネイルの残り領域確認
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSizeCheck (JNIEnv *env, jclass obj, jlong id, jint width, jint height)
 {
 #ifdef DEBUG
@@ -98,7 +98,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSizeChec
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ繧呈紛逅・＠縺ｦ螳ｹ驥冗｢ｺ菫・
+// サムネイルを整理して容量確保
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailImageAlloc (JNIEnv *env, jclass obj, jlong id, jint blocks, jint index)
 {
 #ifdef DEBUG
@@ -109,7 +109,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailImageAll
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ縺悟・縺ｦ險ｭ螳壹＆繧後※縺・ｋ縺九ｒ繝√ぉ繝・け
+// サムネイルが全て設定されているかをチェック
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailCheckAll (JNIEnv *env, jclass obj, jlong id)
 {
 #ifdef DEBUG
@@ -120,7 +120,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailCheckAll
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ菫晏ｭ・
+// サムネイル保存
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSave (JNIEnv *env, jclass obj, jlong id, jobject bitmap, jint index)
 {
 #ifdef DEBUG
@@ -130,7 +130,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSave (JN
 		return 0;
 	}
 
-	// 繝薙ャ繝医・繝・・諠・펡叙蠕・
+	// ビットマップ情報取得
 	AndroidBitmapInfo	info;
 	int					ret;
 	void				*canvas;
@@ -156,7 +156,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailSave (JN
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ謠冗判
+// サムネイル描画
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailDraw(JNIEnv *env, jclass obj, jlong id, jobject bitmap, jint index)
 {
 #ifdef DEBUG
@@ -167,7 +167,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailDraw(JNI
 		return 0;
 	}
 
-	// 繝｡繝｢繝ｪ迯ｲ蠕・
+	// メモリ獲得
 	AndroidBitmapInfo	info;
 	int					ret;
 	void				*canvas;
@@ -193,14 +193,14 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailDraw(JNI
 	return ret;
 }
 
-// 繧ｵ繝阪う繝ｫ隗｣謾ｾ
+// サムネイル解放
 JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ThumbnailFree(JNIEnv *env, jclass obj, jlong id)
 {
 #ifdef DEBUG
 	LOGD("ThumbnailFree : id=%lld", id);
 #endif
 //	if (gThumbnailId != id) {
-//		// 蛻晄悄蛹悶＠縺櫑D縺ｨ逡ｰ縺ｪ繧・
+//		// 初期化したIDと異なる
 //		return -1;
 //	}
 	ThumbnailFree(id);
@@ -218,7 +218,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ImageInitialize (
 	LOGD("Initialize : buffsize=%d * 4, page=%d", buffsize, totalpage);
 #endif
 
-	// 隱ｭ縺ｿ霎ｼ縺ｿ逕ｨ鬆伜沺遒ｺ菫・
+	// 読み込み用領域確保
 	MemFree();
 
 	gLoadBuffSize  = loadsize;
@@ -251,12 +251,12 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ImageSetPage (JNI
 #endif
 	
 	if (gLoadBuffSize < size) {
-		// 繝ｭ繝ｼ繝蛾셅沺荳崎ｶｳ
+		// ロード領域不足
 		return -2;
 	}
 
 	if (page < 0 || gTotalPages <= page) {
-		// 繝壹・繧ｸ逡ｪ蜿ｷ荳肴ｭ｣
+		// ページ番号不正
 		return -3;
 	}
 
@@ -279,7 +279,7 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ImageSetData (JNI
 	jbyte *data = env->GetByteArrayElements(dataArray, NULL);
 
 	if (gLoadFileSize - gLoadFilePos < size) {
-		// 繧ｻ繝・ヨ縺励◆繧ｵ繧､繧ｺ繧定ｶ・∴縺ｪ縺・ｈ縺・↓
+		// セットしたサイズを超えないように
 		size = gLoadFileSize - gLoadFilePos;
 	}
 	memcpy(&gLoadBuffer[gLoadFilePos], data, size);
@@ -414,7 +414,8 @@ JNIEXPORT jint JNICALL Java_src_comitton_stream_CallImgLibrary_ImageConvertBitma
 	AndroidBitmapInfo	info;
 	void				*canvas;
 
-	// 繝ｭ繝ｼ繝・ぅ繝ｳ繧ｰ荳ｭ縺ｮ繧ｨ繝ｩ繝ｼ諠・틆	gLoadError = 0;
+	// ローディング中のエラー情報
+	gLoadError = 0;
 
 	if ((ret = AndroidBitmap_getInfo(env, bitmap, &info)) < 0) {
 		LOGE("AndroidBitmap_getInfo() failed ! error=%d", ret);
@@ -540,7 +541,7 @@ JNIEXPORT void JNICALL Java_src_comitton_stream_CallImgLibrary_ImageFree (JNIEnv
 	LOGD("ImageFree : page=%d", page);
 #endif
 	gImageData[page].UseFlag = 0;
-	// 逕ｻ蜒上・鬆伜沺蜈ｨ驛ｨ繧定ｧ｣謾ｾ
+	// 画像の領域全部を解放
 	ReleaseBuff(page, -1, -1);
 //	gImageData[page].LoadSize = 0;
 //	gImageData[page].LoadPos = 0;
@@ -562,7 +563,7 @@ JNIEXPORT void JNICALL Java_src_comitton_stream_CallImgLibrary_ImageScaleFree (J
 	LOGD("ImageScaleFree : page=%d, half=%d", page, half);
 #endif
 
-	// 逕ｻ蜒上・邵ｮ蟆ｺ繧定ｧ｣謾ｾ
+	// 画像の縮尺を解放
 	ReleaseBuff(page, 1, half);
 	return;
 }
