@@ -2,6 +2,8 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_DISABLE_FATAL_LINKER_WARNINGS := true
+
 LOCAL_CFLAGS := -fstrict-aliasing -fprefetch-loop-arrays
 
 ifeq ($(APP_DEBUG), 0)
@@ -10,6 +12,7 @@ endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp -fPIC -march=armv7-a
+    LOCAL_CPPFLAGS += -DLITTLE_ENDIAN
     LOCAL_ARM_MODE :=arm
     LOCAL_ARM_NEON :=true
 else ifeq ($(TARGET_ARCH_ABI),armeabi)
